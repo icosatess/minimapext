@@ -35,6 +35,7 @@ async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined)
 export function activate(context: vscode.ExtensionContext) {
   console.log('minimapext is running and watching for editor activity');
 
+  handleDidChangeActiveTextEditor(vscode.window.activeTextEditor);
   const subscription = vscode.window.onDidChangeActiveTextEditor(handleDidChangeActiveTextEditor);
   context.subscriptions.push(subscription);
 }
