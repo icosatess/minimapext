@@ -7,6 +7,7 @@ const workspaceFolderNameToComponentName = new Map([
   ['minimapsrv', 'server'],
   ['minimapext', 'extension'],
   ['codesrv', 'codeserver'],
+  ['chatbot', 'chatbot'],
 ]);
 
 async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined) {
