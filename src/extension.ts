@@ -12,12 +12,15 @@ const workspaceFolderNameToComponentName = new Map([
 
 async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined) {
   let componentName = '';
+  let relativePath = '';
   
   if (e === undefined) {
     console.log('No editor is active');
   } else {
     const workspaceFolder = vscode.workspace.getWorkspaceFolder(e.document.uri);
     console.log(`Active editor is ${e.document.uri} in workspace folder ${workspaceFolder?.name}`);
+    relativePath = vscode.workspace.asRelativePath(e.document.uri, false);
+    console.log(`Relative path of current editor is ${relativePath}`);
 
     if (workspaceFolder !== undefined) {
       componentName = workspaceFolderNameToComponentName.get(workspaceFolder.name) ?? '';
@@ -27,7 +30,10 @@ async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined)
   try {
     await fetch(baseUrl + '/component/', {
       method: 'POST',
-      body: componentName,
+      body: JSON.stringify({
+        component: componentName,
+        relativePath,
+      }),
     });
   } catch (e) {
     console.error('Failed to send active editor update', e);
