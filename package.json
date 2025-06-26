@@ -5,9 +5,12 @@
   "author": {
     "name": "Icosatess"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.92.0"
+  },
+  "repository": {
+    "url": "https://github.com/icosatess/minimapext"
   },
   "categories": [
     "Other"
