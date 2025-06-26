@@ -1,14 +1,6 @@
 import * as vscode from 'vscode';
 
-const baseUrl = 'http://127.0.0.1:8081';
-
-const workspaceFolderNameToComponentName = new Map([
-  ['minimapui', 'ui'],
-  ['minimapsrv', 'server'],
-  ['minimapext', 'extension'],
-  ['codesrv', 'codeserver'],
-  ['chatbot', 'chatbot'],
-]);
+const baseUrl = vscode.workspace.getConfiguration('minimapext').minimapServerUrl;
 
 async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined) {
   let componentName = '';
@@ -23,7 +15,7 @@ async function handleDidChangeActiveTextEditor(e: vscode.TextEditor | undefined)
     console.log(`Relative path of current editor is ${relativePath}`);
 
     if (workspaceFolder !== undefined) {
-      componentName = workspaceFolderNameToComponentName.get(workspaceFolder.name) ?? '';
+      componentName = workspaceFolder.name ?? '';
     }
   }
 
